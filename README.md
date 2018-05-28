@@ -1,4 +1,4 @@
-[![License](https://img.shields.io/badge/License-GNU%20AGPL%20V3-green.svg?style=flat)](https://www.gnu.org/licenses/agpl-3.0.en.html) [![Snap Status]
+[![License](https://img.shields.io/badge/License-GNU%20AGPL%20V3-green.svg?style=flat)](https://www.gnu.org/licenses/agpl-3.0.en.html)
 
 ## Overview
 
@@ -16,9 +16,9 @@ The editors allow you to create, edit, save and export text, spreadsheet and pre
 
 ## Getting started
 
-    $ wget ONLYOFFICE_Desktop_Editors-4.8.7.392.glibc2.17-x86_64.AppImage
-    $ chmod a+x ONLYOFFICE_Desktop_Editors-4.8.7.392.glibc2.17-x86_64.AppImage
-    $ ./ONLYOFFICE_Desktop_Editors-4.8.7.392.glibc2.17-x86_64.AppImage
+    $ wget https://github.com/ONLYOFFICE/appimage-desktopeditors/releases/download/v4.8.7b/ONLYOFFICE_Desktop_Editors-4.8.7-x86_64.AppImage
+    $ chmod a+x ONLYOFFICE_Desktop_Editors-4.8.7-x86_64.AppImage
+    $ ./ONLYOFFICE_Desktop_Editors-4.8.7-x86_64.AppImage
 
 ## Project Information
 
