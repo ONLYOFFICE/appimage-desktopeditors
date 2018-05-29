@@ -4,11 +4,11 @@ ingredients:
   packages:
     - onlyoffice-desktopeditors
     - libgconf2-4
+    - kde-baseapps-bin
   dist: trusty
   sources:
-    - deb http://us.archive.ubuntu.com/ubuntu/ trusty main universe
-  script:
-    - wget -c https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb
+    - deb http://archive.ubuntu.com/ubuntu/ trusty main universe
+    - deb http://download.onlyoffice.com/repo/debian squeeze main
 
 script:
   - cat > ./usr/share/applications/desktopeditors.desktop <<\EOF
