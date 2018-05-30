@@ -16,9 +16,9 @@ The editors allow you to create, edit, save and export text, spreadsheet and pre
 
 ## Getting started
 
-    $ wget https://github.com/ONLYOFFICE/appimage-desktopeditors/releases/download/v5.1.29/ONLYOFFICE_Desktop_Editors-5.1.29-x86_64.AppImage
-    $ chmod a+x ONLYOFFICE_Desktop_Editors-5.1.29-x86_64.AppImage
-    $ ./ONLYOFFICE_Desktop_Editors-5.1.29-x86_64.AppImage
+    $ wget https://github.com/ONLYOFFICE/appimage-desktopeditors/releases/download/v5.1.29/DesktopEditors-x86_64.AppImage
+    $ chmod a+x DesktopEditors-x86_64.AppImage
+    $ ./DesktopEditors-x86_64.AppImage
 
 ## Project Information
 
