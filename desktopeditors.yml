@@ -5,6 +5,7 @@ ingredients:
     - onlyoffice-desktopeditors
     - libgconf2-4
     - kde-baseapps-bin
+    - libcurl3-gnutls
   dist: trusty
   sources:
     - deb http://archive.ubuntu.com/ubuntu/ trusty main universe
