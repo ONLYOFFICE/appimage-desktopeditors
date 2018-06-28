@@ -6,6 +6,8 @@ ingredients:
     - libgconf2-4
     - kde-baseapps-bin
     - libcurl3-gnutls
+    -	libgmp10
+    - libkeyutils1
   dist: trusty
   sources:
     - deb http://archive.ubuntu.com/ubuntu/ trusty main universe
