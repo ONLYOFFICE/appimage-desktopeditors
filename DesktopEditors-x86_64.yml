@@ -2,12 +2,14 @@ app: desktopeditors
 
 ingredients:
   packages:
-    - onlyoffice-desktopeditors
-    - libgconf2-4
     - kde-baseapps-bin
+    - libcurl3
     - libcurl3-gnutls
-    -	libgmp10
+    - libgconf2-4
+    - libglu1-mesa
+    - libgnutls26
     - libkeyutils1
+    - onlyoffice-desktopeditors
   dist: trusty
   sources:
     - deb http://archive.ubuntu.com/ubuntu/ trusty main universe
