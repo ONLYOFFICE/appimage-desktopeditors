@@ -31,7 +31,7 @@ script:
   - EOF
   - cp ./usr/share/applications/desktopeditors.desktop .
   - mv opt/onlyoffice/desktopeditors/* usr/bin/
-  - sed -i -e 's|^Exec=.*|Exec=onlyoffice-desktopeditors.sh|g' desktopeditors.desktop
+  - sed -i -e 's|^\(cd\).*|\1 \$(dirname \$(readlink -f "\$0"))|g' usr/bin/desktopeditors
   - mv usr/lib/x86_64-linux-gnu/*so* usr/bin/
   - mv usr/lib/*so* usr/bin/
   - mv lib/x86_64-linux-gnu/*so* usr/bin/
