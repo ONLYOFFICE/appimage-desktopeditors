@@ -20,6 +20,23 @@ The editors allow you to create, edit, save and export text, spreadsheet and pre
     $ chmod a+x DesktopEditors-x86_64.AppImage
     $ ./DesktopEditors-x86_64.AppImage
 
+## Building ONLYOFFICE Desktop Editors AppImage from source code
+### Installing dependency
+```
+sudo apt-get install --force-yes -yq \
+    build-essential \
+    git \
+    wget
+```
+### Getting source code
+```
+git clone https://github.com/ONLYOFFICE/appimage-desktopeditors.git
+```
+### Compiling AppImage 
+```
+cd appimage-desktopeditors
+make clean && make
+```
 ## Project Information
 
 Official website: [https://www.onlyoffice.com/apps.aspx](https://www.onlyoffice.com/apps.aspx/?utm_source=github&utm_medium=cpc&utm_campaign=GitHubAppimage)
