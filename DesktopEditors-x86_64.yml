@@ -8,6 +8,7 @@ ingredients:
     - libgconf2-4
     - libglu1-mesa
     - libgnutls26
+    - libgtk2.0-0
     - libkeyutils1
     - onlyoffice-desktopeditors
   dist: trusty
