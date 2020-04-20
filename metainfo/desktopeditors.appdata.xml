@@ -8,7 +8,7 @@
 	<description>
 		<p>ONLYOFFICE Desktop Editors is a free office suite that combines text, spreadsheet and presentation editors allowing to create, view and edit documents stored on your Windows/Linux PC or Mac without an Internet connection. It is fully compatible with Office Open XML formats: .docx, .xlsx, .pptx.</p>
 	</description>
-	<launchable type="desktop-id">desktopeditors.desktop</launchable>
+	<launchable type="desktop-id">onlyoffice-desktopeditors.desktop</launchable>
 	<url type="homepage">https://github.com/ONLYOFFICE/appimage-desktopeditors</url>
 	<screenshots>
 		<screenshot type="default">
@@ -16,6 +16,6 @@
 		</screenshot>
 	</screenshots>
 	<provides>
-		<id>desktopeditors.desktop</id>
+		<id>onlyoffice-desktopeditors.desktop</id>
 	</provides>
 </component>
