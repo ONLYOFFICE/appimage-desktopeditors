@@ -16,7 +16,7 @@ The editors allow you to create, edit, save and export text, spreadsheet and pre
 
 ## Getting started
 
-    $ wget http://download.onlyoffice.com/install/desktop/editors/linux/DesktopEditors-x86_64.AppImage
+    $ wget https://download.onlyoffice.com/install/desktop/editors/linux/DesktopEditors-x86_64.AppImage
     $ chmod a+x DesktopEditors-x86_64.AppImage
     $ ./DesktopEditors-x86_64.AppImage
 
