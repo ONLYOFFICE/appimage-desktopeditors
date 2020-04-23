@@ -14,7 +14,7 @@ ingredients:
   dist: trusty
   sources:
     - deb http://archive.ubuntu.com/ubuntu/ trusty main universe
-    - deb http://download.onlyoffice.com/repo/debian squeeze main
+    - deb https://download.onlyoffice.com/repo/debian squeeze main
 
 script:
   - cat > ./usr/share/applications/onlyoffice-desktopeditors.desktop <<\EOF
@@ -36,6 +36,8 @@ script:
   - mv opt/onlyoffice/desktopeditors/* usr/bin/
   - sed -i -e 's|DIR=/opt/onlyoffice/desktopeditors|cd \$(dirname \$(readlink -f "\$0"))|g' usr/bin/desktopeditors
   - sed -i -e 's|$DIR/|./|g' usr/bin/desktopeditors
+  - sed -i -e 's|SOURCE_DOC_DIR=|cd \$(dirname \$(readlink -f "\$0"))\nSOURCE_DOC_DIR=|g' usr/bin/desktopeditors
+  - sed -i -e 's|/opt/onlyoffice/desktopeditors|.|g' usr/bin/desktopeditors
   - mv usr/lib/x86_64-linux-gnu/*so* usr/bin/
   - mv usr/lib/*so* usr/bin/
   - mv lib/x86_64-linux-gnu/*so* usr/bin/
