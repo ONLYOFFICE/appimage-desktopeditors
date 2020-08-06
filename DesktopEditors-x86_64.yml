@@ -14,7 +14,7 @@ ingredients:
   dist: trusty
   sources:
     - deb http://archive.ubuntu.com/ubuntu/ trusty main universe
-    - deb https://download.onlyoffice.com/repo/debian squeeze main
+    - deb http://download.onlyoffice.com/repo/debian squeeze main
 
 script:
   - cat > ./usr/share/applications/onlyoffice-desktopeditors.desktop <<\EOF
