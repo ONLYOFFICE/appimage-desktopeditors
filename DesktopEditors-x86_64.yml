@@ -10,11 +10,11 @@ ingredients:
     - libgnutls26
     - libgtk2.0-0
     - libkeyutils1
-    - onlyoffice-desktopeditors
   dist: trusty
+  script:
+    - wget http://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb
   sources:
     - deb http://archive.ubuntu.com/ubuntu/ trusty main universe
-    - deb http://download.onlyoffice.com/repo/debian squeeze main
 
 script:
   - cat > ./usr/share/applications/onlyoffice-desktopeditors.desktop <<\EOF
@@ -50,5 +50,5 @@ script:
   - mv usr/bin/asc-de-24.png usr/share/icons/hicolor/24x24/apps/asc-de.png
   - mv usr/bin/asc-de-128.png usr/share/icons/hicolor/128x128/apps/asc-de.png
 #  - strings usr/bin/DesktopEditors | grep "Ascensio System SIA" -C 1 | head -n 1 > ../VERSION
-  - echo "5.6.0" > ../VERSION
+  - echo "5.6.4" > ../VERSION
   - rm -rf usr/share/fonts
