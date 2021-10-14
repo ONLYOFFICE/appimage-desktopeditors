@@ -39,7 +39,7 @@ make clean && make
 ```
 ## Project Information
 
-Official website: [https://www.onlyoffice.com/apps.aspx](https://www.onlyoffice.com/apps.aspx?utm_source=github&utm_medium=cpc&utm_campaign=GitHubAppimage)
+Official website: [https://www.onlyoffice.com/desktop.aspx](https://www.onlyoffice.com/desktop.aspx?utm_source=github&utm_medium=cpc&utm_campaign=GitHubAppimage)
 
 Code repository: [https://github.com/ONLYOFFICE/DesktopEditors](https://github.com/ONLYOFFICE/DesktopEditors "https://github.com/ONLYOFFICE/DesktopEditors")
 
