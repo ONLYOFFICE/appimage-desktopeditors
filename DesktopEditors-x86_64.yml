@@ -15,9 +15,16 @@ ingredients:
     - gstreamer1.0-plugins-good
     - gstreamer1.0-pulseaudio
     - gstreamer1.0-x
+    - libtracker-sparql-3.0-0
+    - libglib2.0-0
+    - libatk1.0-0
+    - libatk-bridge2.0-0
+    - libgtk-3-0
+    - libpango-1.0-0
+  debs:
+    - /home/roman/projects/99_appimage-glib2/appimage-desktopeditors/onlyoffice-desktopeditors_amd64.deb
   dist: trusty
   script:
-    - wget http://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb
     - wget http://archive.ubuntu.com/ubuntu/pool/main/k/keyutils/libkeyutils1_1.5.9-8ubuntu1_amd64.deb
   sources:
     - deb http://archive.ubuntu.com/ubuntu/ trusty main universe
@@ -47,10 +54,10 @@ script:
   - sed -i -e 's|export LD_LIBRARY_PATH=$DIR:$LD_LIBRARY_PATH|export LD_LIBRARY_PATH=$APPDIR/usr/bin/:$LD_LIBRARY_PATH\nexport GST_PLUGIN_SCANNER=\$APPDIR/usr/lib/x86_64-linux-gnu/gstreamer1.0/gstreamer-1.0/gst-plugin-scanner\nexport GST_PLUGIN_PATH=\$APPDIR/usr/lib/x86_64-linux-gnu/gstreamer1.0/|g' usr/bin/desktopeditors
   - mkdir -p usr/lib/x86_64-linux-gnu/gstreamer1.0/
   - cp usr/lib/x86_64-linux-gnu/libgst* usr/lib/x86_64-linux-gnu/gstreamer1.0/
-  - mv usr/lib/x86_64-linux-gnu/*so* usr/bin/
-  - mv usr/lib/*so* usr/bin/
-  - mv lib/x86_64-linux-gnu/*so* usr/bin/
-  - rm -rf bin/ opt/ etc/ var/ lib/
+  - #mv usr/lib/x86_64-linux-gnu/*so* usr/bin/
+  - #mv usr/lib/*so* usr/bin/
+  - #mv lib/x86_64-linux-gnu/*so* usr/bin/
+  - #rm -rf bin/ opt/ etc/ var/ lib/
   - cp ./usr/bin/asc-de-256.png asc-de.png
   - mv usr/bin/asc-de-64.png usr/share/icons/hicolor/64x64/apps/asc-de.png
   - mv usr/bin/asc-de-48.png usr/share/icons/hicolor/48x48/apps/asc-de.png
