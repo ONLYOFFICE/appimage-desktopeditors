@@ -43,7 +43,7 @@ libfontconfig1
 libgbm1
 libgcc1
 # libgconf-2-4 # elementary OS 0.4 Loki does NOT have it
-libgdk-pixbuf2.0-0
+#libgdk-pixbuf2.0-0
 libgl1
 libgl1-mesa
 libgl1-mesa-dri
@@ -58,8 +58,8 @@ libgtk2.0-0
 libnss3
 libpango1.0-0
 #libpango-1.0-0
-libpangocairo-1.0-0 # Workaround for: openSUSE: undefined symbol: hb_buffer_set_cluster_level?; commenting this out leads to square boxes instead of fonts
-libpangoft2-1.0-0 # Workaround for: openSUSE: undefined symbol: hb_buffer_set_cluster_level?; commenting this out leads to square boxes instead of fonts
+#libpangocairo-1.0-0 # Workaround for: openSUSE: undefined symbol: hb_buffer_set_cluster_level?; commenting this out leads to square boxes instead of fonts
+#libpangoft2-1.0-0 # Workaround for: openSUSE: undefined symbol: hb_buffer_set_cluster_level?; commenting this out leads to square boxes instead of fonts
 libstdc++6
 libtasn1-6
 libwayland-egl1-mesa # e.g., OpenRA

@@ -35,6 +35,7 @@ git clone https://github.com/ONLYOFFICE/appimage-desktopeditors.git
 ### Compiling AppImage 
 ```
 cd appimage-desktopeditors
+export STATIC_FILES=$PWD
 make clean && make
 ```
 ## Project Information

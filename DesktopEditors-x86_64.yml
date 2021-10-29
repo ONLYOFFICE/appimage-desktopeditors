@@ -21,6 +21,9 @@ ingredients:
     - libatk-bridge2.0-0
     - libgtk-3-0
     - libpango-1.0-0
+    - libpangoft2-1.0-0
+    - libpangocairo-1.0-0
+    - libgdk-pixbuf2.0-0
   debs:
     - /home/roman/projects/99_appimage-glib2/appimage-desktopeditors/onlyoffice-desktopeditors_amd64.deb
   dist: trusty
