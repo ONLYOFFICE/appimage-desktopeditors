@@ -21,6 +21,8 @@ ingredients:
     - wget http://archive.ubuntu.com/ubuntu/pool/main/k/keyutils/libkeyutils1_1.5.9-8ubuntu1_amd64.deb
   sources:
     - deb http://archive.ubuntu.com/ubuntu/ trusty main universe
+  exclude:
+    - libsqlite3-0
 
 script:
   - cat > ./usr/share/applications/onlyoffice-desktopeditors.desktop <<\EOF
@@ -51,6 +53,7 @@ script:
   - mv usr/lib/*so* usr/bin/
   - mv lib/x86_64-linux-gnu/*so* usr/bin/
   - rm -rf bin/ opt/ etc/ var/ lib/
+  - rm -f usr/bin/libgmodule-2.0.so.0*
   - cp ./usr/bin/asc-de-256.png asc-de.png
   - mv usr/bin/asc-de-64.png usr/share/icons/hicolor/64x64/apps/asc-de.png
   - mv usr/bin/asc-de-48.png usr/share/icons/hicolor/48x48/apps/asc-de.png
