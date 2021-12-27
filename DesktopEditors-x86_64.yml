@@ -18,7 +18,8 @@ ingredients:
     - gstreamer1.0-x
   dist: trusty
   script:
-    - wget http://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb
+    - DESKTOPEDITORS_DEB_URL=${DESKTOPEDITORS_DEB_URL:-"http://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb"}
+    - wget $DESKTOPEDITORS_DEB_URL
     - wget http://archive.ubuntu.com/ubuntu/pool/main/k/keyutils/libkeyutils1_1.5.9-8ubuntu1_amd64.deb
   sources:
     - deb http://archive.ubuntu.com/ubuntu/ trusty main universe
