@@ -2,6 +2,7 @@ OUT_DIR:=out/
 APP_DIR:=desktopeditors/
 TARGET:=$(OUT_DIR)DesktopEditors-x86_64.AppImage
 P2A:=pkg2appimage
+export STATIC_FILES=$(PWD)
 
 .PHONY : all clean
 
