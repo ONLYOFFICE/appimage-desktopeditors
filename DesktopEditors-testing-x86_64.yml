@@ -1,0 +1,67 @@
+app: desktopeditors
+
+ingredients:
+  packages:
+    - kde-baseapps-bin
+    - libcurl3
+    - libcurl3-gnutls
+    - libgconf2-4
+    - libglu1-mesa
+    - libgnutls26
+    - libgtk2.0-0
+    - libgstreamer1.0-0
+    - gstreamer1.0-libav
+    - gstreamer1.0-plugins-base
+    - gstreamer1.0-plugins-good
+    - gstreamer1.0-plugins-ugly
+    - gstreamer1.0-pulseaudio
+    - gstreamer1.0-x
+  dist: trusty
+  script:
+    - wget http://archive.ubuntu.com/ubuntu/pool/main/k/keyutils/libkeyutils1_1.5.9-8ubuntu1_amd64.deb
+  sources:
+    - deb http://archive.ubuntu.com/ubuntu/ trusty main universe
+  debs:
+    - ${DESKTOPEDITORS_DEB_PATH}
+  exclude:
+    - libsqlite3-0
+
+script:
+  - cat > ./usr/share/applications/onlyoffice-desktopeditors.desktop <<\EOF
+  - [Desktop Entry]
+  - Name=ONLYOFFICE Desktop Editors
+  - Type=Application
+  - GenericName=ONLYOFFICE Desktop Editors
+  - Comment=Edit office documents
+  - Exec=desktopeditors %F
+  - Terminal=false
+  - Icon=asc-de
+  - Keywords=Text;Document;OpenDocument Text;Microsoft Word;Microsoft Works;odt;doc;docx;rtf;
+  - Categories=Office;WordProcessor;Spreadsheet;Presentation;
+  - MimeType=application/msword;application/vnd.ms-word;application/x-doc;application/rtf;text/rtf;application/vnd.wordperfect;application/wordperfect;application/vnd.openxmlformats-officedocument.wordprocessingml.document;application/vnd.ms-word.document.macroenabled.12;application/vnd.openxmlformats-officedocument.wordprocessingml.template;application/vnd.ms-word.template.macroenabled.12;application/msexcel;application/vnd.ms-excel;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;application/vnd.ms-excel.sheet.macroenabled.12;application/vnd.openxmlformats-officedocument.spreadsheetml.template;application/vnd.ms-excel.template.macroenabled.12;application/vnd.ms-excel.sheet.binary.macroenabled.12;text/csv;text/spreadsheet;application/csv;application/excel;application/x-excel;application/x-msexcel;application/x-ms-excel;text/comma-separated-values;text/tab-separated-values;text/x-comma-separated-values;text/x-csv;application/mspowerpoint;application/vnd.ms-powerpoint;application/vnd.openxmlformats-officedocument.presentationml.presentation;application/vnd.ms-powerpoint.presentation.macroenabled.12;application/vnd.openxmlformats-officedocument.presentationml.template;application/vnd.ms-powerpoint.template.macroenabled.12;application/vnd.openxmlformats-officedocument.presentationml.slide;application/vnd.openxmlformats-officedocument.presentationml.slideshow;application/vnd.ms-powerpoint.slideshow.macroEnabled.12;
+  - EOF
+  - cp ./usr/share/applications/onlyoffice-desktopeditors.desktop .
+  - mkdir -p ./usr/share/metainfo
+  - cp ../../metainfo/desktopeditors.appdata.xml ./usr/share/metainfo
+  - mv opt/onlyoffice/desktopeditors/* usr/bin/
+  - sed -i -e 's|DIR=/opt/onlyoffice/desktopeditors|cd \$(dirname \$(readlink -f "\$0"))|g' usr/bin/desktopeditors
+  - sed -i -e 's|$DIR/|./|g' usr/bin/desktopeditors
+  - sed -i -e 's|SOURCE_DOC_DIR=|cd \$(dirname \$(readlink -f "\$0"))\nSOURCE_DOC_DIR=|g' usr/bin/desktopeditors
+  - sed -i -e 's|/opt/onlyoffice/desktopeditors|.|g' usr/bin/desktopeditors
+  - sed -i -e 's|export LD_LIBRARY_PATH=$DIR:$LD_LIBRARY_PATH|export LD_LIBRARY_PATH=$APPDIR/usr/bin/:$LD_LIBRARY_PATH\nexport GST_PLUGIN_SCANNER=\$APPDIR/usr/lib/x86_64-linux-gnu/gstreamer1.0/gstreamer-1.0/gst-plugin-scanner\nexport GST_PLUGIN_PATH=\$APPDIR/usr/lib/x86_64-linux-gnu/gstreamer1.0/|g' usr/bin/desktopeditors
+  - mkdir -p usr/lib/x86_64-linux-gnu/gstreamer1.0/
+  - cp usr/lib/x86_64-linux-gnu/libgst* usr/lib/x86_64-linux-gnu/gstreamer1.0/
+  - mv usr/lib/x86_64-linux-gnu/*so* usr/bin/
+  - mv usr/lib/*so* usr/bin/
+  - mv lib/x86_64-linux-gnu/*so* usr/bin/
+  - rm -rf bin/ opt/ etc/ var/ lib/
+  - rm -f usr/bin/libgmodule-2.0.so.0*
+  - cp ./usr/bin/asc-de-256.png asc-de.png
+  - mv usr/bin/asc-de-64.png usr/share/icons/hicolor/64x64/apps/asc-de.png
+  - mv usr/bin/asc-de-48.png usr/share/icons/hicolor/48x48/apps/asc-de.png
+  - mv usr/bin/asc-de-32.png usr/share/icons/hicolor/32x32/apps/asc-de.png
+  - mv usr/bin/asc-de-256.png usr/share/icons/hicolor/256x256/apps/asc-de.png
+  - mv usr/bin/asc-de-24.png usr/share/icons/hicolor/24x24/apps/asc-de.png
+  - mv usr/bin/asc-de-128.png usr/share/icons/hicolor/128x128/apps/asc-de.png
+  - strings usr/bin/DesktopEditors | grep "ver\." -C 1 | tail -n 1 | sed -r 's/([0-9]+).([0-9]+).([0-9]+).([0-9]+)/\1.\2.\3/' > ../VERSION
+  - rm -rf usr/share/fonts
