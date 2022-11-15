@@ -29,7 +29,6 @@ gtk2-engines-pixbuf
 kde-runtime
 libasound2
 libatk1.0-0
-libc6
 libc6-dev
 libcairo2
 libcups2

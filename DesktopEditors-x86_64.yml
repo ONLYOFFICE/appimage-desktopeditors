@@ -16,6 +16,7 @@ ingredients:
     - gstreamer1.0-plugins-ugly
     - gstreamer1.0-pulseaudio
     - gstreamer1.0-x
+    - libc6
   dist: trusty
   script:
     - DESKTOPEDITORS_DEB_URL=${DESKTOPEDITORS_DEB_URL:-"http://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb"}
