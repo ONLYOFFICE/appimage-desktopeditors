@@ -9,19 +9,20 @@ ingredients:
     - libglu1-mesa
     - libgnutls26
     - libgtk2.0-0
-    - libgstreamer1.0-0
     - gstreamer1.0-libav
     - gstreamer1.0-plugins-base
     - gstreamer1.0-plugins-good
     - gstreamer1.0-plugins-ugly
     - gstreamer1.0-pulseaudio
     - gstreamer1.0-x
+    - freeglut3
     - libc6
   dist: trusty
   script:
     - DESKTOPEDITORS_DEB_URL=${DESKTOPEDITORS_DEB_URL:-"http://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb"}
     - wget $DESKTOPEDITORS_DEB_URL
     - wget http://archive.ubuntu.com/ubuntu/pool/main/k/keyutils/libkeyutils1_1.5.9-8ubuntu1_amd64.deb
+    - wget http://archive.ubuntu.com/ubuntu/pool/main/g/gstreamer1.0/libgstreamer1.0-0_1.8.0-1_amd64.deb
   sources:
     - deb http://archive.ubuntu.com/ubuntu/ trusty main universe
   exclude:
@@ -49,7 +50,7 @@ script:
   - sed -i -e 's|$DIR/|./|g' usr/bin/desktopeditors
   - sed -i -e 's|SOURCE_DOC_DIR=|cd \$(dirname \$(readlink -f "\$0"))\nSOURCE_DOC_DIR=|g' usr/bin/desktopeditors
   - sed -i -e 's|/opt/onlyoffice/desktopeditors|.|g' usr/bin/desktopeditors
-  - sed -i -e 's|export LD_LIBRARY_PATH=$DIR:$LD_LIBRARY_PATH|export LD_LIBRARY_PATH=$APPDIR/usr/bin/:$LD_LIBRARY_PATH\nexport GST_PLUGIN_SCANNER=\$APPDIR/usr/lib/x86_64-linux-gnu/gstreamer1.0/gstreamer-1.0/gst-plugin-scanner\nexport GST_PLUGIN_PATH=\$APPDIR/usr/lib/x86_64-linux-gnu/gstreamer1.0/|g' usr/bin/desktopeditors
+  - sed -i -e 's|export LD_LIBRARY_PATH=$DIR$LDLPATH|export LD_LIBRARY_PATH=$APPDIR/usr/bin/:$DIR$LDLPATH\nexport GST_PLUGIN_SCANNER=\$APPDIR/usr/lib/gstreamer-1.0/gstreamer1.0/gstreamer-1.0/gst-plugin-scanner\nexport GST_PLUGIN_PATH=\$APPDIR/usr/lib/gstreamer-1.0/gstreamer1.0/|g' usr/bin/desktopeditors
   - mkdir -p usr/lib/x86_64-linux-gnu/gstreamer1.0/
   - cp usr/lib/x86_64-linux-gnu/libgst* usr/lib/x86_64-linux-gnu/gstreamer1.0/
   - mv usr/lib/x86_64-linux-gnu/*so* usr/bin/
@@ -57,6 +58,7 @@ script:
   - mv lib/x86_64-linux-gnu/*so* usr/bin/
   - rm -rf bin/ opt/ etc/ var/ lib/
   - rm -f usr/bin/libgmodule-2.0.so.0*
+  - ln -s x86_64-linux-gnu usr/lib/gstreamer-1.0
   - cp ./usr/bin/asc-de-256.png asc-de.png
   - mv usr/bin/asc-de-64.png usr/share/icons/hicolor/64x64/apps/asc-de.png
   - mv usr/bin/asc-de-48.png usr/share/icons/hicolor/48x48/apps/asc-de.png
