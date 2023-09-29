@@ -221,3 +221,5 @@ libfribidi.so.0 # https://github.com/olive-editor/olive/issues/221 and https://g
 # https://github.com/ONLYOFFICE/appimage-desktopeditors/issues/3
 # Apparently coreutils depends on it, so it should be safe to assume that it comes with every target system
 libgmp.so.10
+libjpeg.so.8
+libjpeg.so.8.0.2
