@@ -67,5 +67,5 @@ script:
   - mv usr/bin/asc-de-24.png usr/share/icons/hicolor/24x24/apps/asc-de.png
   - mv usr/bin/asc-de-128.png usr/share/icons/hicolor/128x128/apps/asc-de.png
   - sed -i -e 's|deb|appimage|g' usr/bin/converter/package.config
-  - strings usr/bin/DesktopEditors | grep "ver\." -C 1 | tail -n 1 | sed -r 's/([0-9]+).([0-9]+).([0-9]+).([0-9]+)/\1.\2.\3/' > ../VERSION
+  - strings usr/bin/DesktopEditors | grep "^ver\." -C 1 | tail -n 1 | sed -r 's/([0-9]+).([0-9]+).([0-9]+).([0-9]+)/\1.\2.\3/' > ../VERSION
   - rm -rf usr/share/fonts
