@@ -1,0 +1,45 @@
+name: Build APPIMAGE package
+
+run-name: Build ONLYOFFICE_DesktopEditors-${{ github.event.inputs.version }}-${{ github.event.inputs.build }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        description: 'Version'
+        required: true
+      build:
+        description: 'Build number'
+        type: string
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out Git repository
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt install -y desktop-file-utils libfuse2
+
+    - name: Build
+      run: |
+        VERSION=${{ github.event.inputs.version }}
+        BUILD_NUMBER=${{ github.event.inputs.build }}
+        export DESKTOPEDITORS_DEB_URL="https://s3.eu-west-1.amazonaws.com/repo-doc-onlyoffice-com/desktop/linux/debian/onlyoffice-desktopeditors_${VERSION}-${BUILD_NUMBER}_amd64.deb"
+        make clean && make pkg2appimage all
+        #rename Artifact
+        FILENAME=`ls out | grep .AppImage`
+        TARGETNAME=`echo $FILENAME | sed -r "s/([0-9]+).([0-9]+).([0-9]+)/\1.\2.\3-${BUILD_NUMBER}/"`
+        mv out/$FILENAME out/$TARGETNAME
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ONLYOFFICE_DesktopEditors-${{ github.event.inputs.version }}-${{ github.event.inputs.build }}
+        path: ./out
+        retention-days: 14
+
