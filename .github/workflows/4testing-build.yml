@@ -50,5 +50,5 @@ jobs:
       with:
         name: ONLYOFFICE_DesktopEditors-${{ github.event.inputs.version }}-${{ github.event.inputs.build }}
         path: ./out
-        retention-days: 14
+        retention-days: 28
 
