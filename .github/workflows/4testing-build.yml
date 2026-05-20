@@ -28,6 +28,8 @@ jobs:
     - name: Build
       run: |
         VERSION=${{ github.event.inputs.version }}
+        ARCH=$(uname -m)
+        UPINFO="gh-releases-zsync|$(echo $GITHUB_REPOSITORY | tr '/' '|')|latest|*$ARCH.AppImage.zsync"
         BUILD_NUMBER=${{ github.event.inputs.build }}
         export DESKTOPEDITORS_DEB_URL="https://s3.eu-west-1.amazonaws.com/repo-doc-onlyoffice-com/desktop/linux/debian/onlyoffice-desktopeditors_${VERSION}-${BUILD_NUMBER}_amd64.deb"
         make clean && make pkg2appimage all
@@ -42,7 +44,8 @@ jobs:
         wget https://github.com/AppImage/appimagetool/releases/download/continuous/$APPIMAGETOOL
         chmod +x $APPIMAGETOOL
         #rebuild Artifact
-        ./$APPIMAGETOOL squashfs-root out/$TARGETNAME
+        ./$APPIMAGETOOL -u "$UPINFO" squashfs-root out/$TARGETNAME
+        mv *.AppImage.zsync out || true
         rm out/$TMPNAME
 
     - name: Upload Artifact
