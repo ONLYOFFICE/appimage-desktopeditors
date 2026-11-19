@@ -47,7 +47,7 @@ jobs:
         rm out/$TMPNAME
 
     - name: Upload Artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: ONLYOFFICE_DesktopEditors-${{ github.event.inputs.version }}-${{ github.event.inputs.build }}-x86_64
         path: ./out
@@ -85,9 +85,105 @@ jobs:
         rm out/$TMPNAME
 
     - name: Upload Artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: ONLYOFFICE_DesktopEditors-${{ github.event.inputs.version }}-${{ github.event.inputs.build }}-arm64
         path: ./out
         retention-days: 28
 
+  test_x86_64:
+    name: test x86_64 (${{ matrix.name }})
+    needs: build_x86_64
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { name: ubuntu-22.04, image: 'ubuntu:22.04' }
+          - { name: ubuntu-24.04, image: 'ubuntu:24.04' }
+          - { name: ubuntu-26.04, image: 'ubuntu:26.04' }
+          - { name: ubuntu-26.04-fuse, image: 'ubuntu:26.04', mode: fuse }
+          - { name: debian-12, image: 'debian:12' }
+          - { name: debian-13, image: 'debian:13' }
+          - { name: fedora-44, image: 'fedora:44' }
+          - { name: fedora-45, image: 'fedora:45' }
+          - { name: opensuse-16.0, image: 'registry.opensuse.org/opensuse/leap:16.0' }
+          - { name: arch, image: 'archlinux:latest' }
+    steps:
+    - name: Check out Git repository
+      uses: actions/checkout@v5
+
+    - name: Download Artifact
+      uses: actions/download-artifact@v8
+      with:
+        name: ONLYOFFICE_DesktopEditors-${{ github.event.inputs.version }}-${{ github.event.inputs.build }}-x86_64
+        path: out
+
+    - name: Smoke test
+      run: |
+        APP=$(ls out/*.AppImage | head -1)
+        MODE=${{ matrix.mode || 'extract' }}
+        EXTRA=""
+        [ "$MODE" = fuse ] && EXTRA="--device /dev/fuse --cap-add SYS_ADMIN --security-opt apparmor:unconfined"
+        mkdir -p result
+        docker run --rm --shm-size=1g --security-opt seccomp=unconfined $EXTRA -e MODE=$MODE \
+          -v "$PWD/$APP:/app/app.AppImage:ro" \
+          -v "$PWD/test/smoke-test.sh:/smoke-test.sh:ro" \
+          -v "$PWD/result:/result" \
+          ${{ matrix.image }} bash /smoke-test.sh
+
+    - name: Upload test results
+      if: failure()
+      uses: actions/upload-artifact@v7
+      with:
+        name: test-x86_64-${{ matrix.name }}
+        path: result
+        retention-days: 7
+
+  test_arm64:
+    name: test arm64 (${{ matrix.name }})
+    needs: build_arm64
+    runs-on: ubuntu-22.04-arm
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { name: ubuntu-22.04, image: 'ubuntu:22.04' }
+          - { name: ubuntu-24.04, image: 'ubuntu:24.04' }
+          - { name: ubuntu-26.04, image: 'ubuntu:26.04' }
+          - { name: ubuntu-26.04-fuse, image: 'ubuntu:26.04', mode: fuse }
+          - { name: debian-12, image: 'debian:12' }
+          - { name: debian-13, image: 'debian:13' }
+          - { name: fedora-44, image: 'fedora:44' }
+          - { name: fedora-45, image: 'fedora:45' }
+          - { name: opensuse-16.0, image: 'registry.opensuse.org/opensuse/leap:16.0' }
+    steps:
+    - name: Check out Git repository
+      uses: actions/checkout@v5
+
+    - name: Download Artifact
+      uses: actions/download-artifact@v8
+      with:
+        name: ONLYOFFICE_DesktopEditors-${{ github.event.inputs.version }}-${{ github.event.inputs.build }}-arm64
+        path: out
+
+    - name: Smoke test
+      run: |
+        APP=$(ls out/*.AppImage | head -1)
+        MODE=${{ matrix.mode || 'extract' }}
+        EXTRA=""
+        [ "$MODE" = fuse ] && EXTRA="--device /dev/fuse --cap-add SYS_ADMIN --security-opt apparmor:unconfined"
+        mkdir -p result
+        docker run --rm --shm-size=1g --security-opt seccomp=unconfined $EXTRA -e MODE=$MODE \
+          -v "$PWD/$APP:/app/app.AppImage:ro" \
+          -v "$PWD/test/smoke-test.sh:/smoke-test.sh:ro" \
+          -v "$PWD/result:/result" \
+          ${{ matrix.image }} bash /smoke-test.sh
+
+    - name: Upload test results
+      if: failure()
+      uses: actions/upload-artifact@v7
+      with:
+        name: test-arm64-${{ matrix.name }}
+        path: result
+        retention-days: 7
