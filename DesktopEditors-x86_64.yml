@@ -61,5 +61,6 @@ script:
   - ln -s x86_64-linux-gnu usr/lib/gstreamer-1.0
   - cp ./usr/share/icons/hicolor/256x256/apps/onlyoffice-desktopeditors.png onlyoffice-desktopeditors.png
   - sed -i -e 's|deb|appimage|g' usr/bin/converter/package.config
-  - strings usr/bin/DesktopEditors | grep "^ver\." -C 1 | tail -n 1 | sed -r 's/([0-9]+).([0-9]+).([0-9]+).([0-9]+)/\1.\2.\3/' > ../VERSION
+  - dpkg-deb -f ../onlyoffice-desktopeditors*.deb Version | cut -d- -f1 > ../VERSION
   - rm -rf usr/share/fonts
+  - chmod -R a+rX .
